@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_graph"
+    app:startDestination="@id/StartFragment">
+
+    <fragment android:id="@+id/StartFragment"
+        android:name="com.v.nevi.p.sv.android.myapplication.StartFragment"
+        android:label="StartFragment"/>
+
+
+    <fragment android:id="@+id/HistoryFragment"
+        android:name="com.v.nevi.p.sv.android.myapplication.HistoryFragment"
+        android:label="HistoryFragment"/>
+
+    <activity android:id="@+id/counter_activity"
+        android:name="com.v.nevi.p.sv.android.myapplication.CounterActivity"
+        android:label="Counter Activity"/>
+
+</navigation>

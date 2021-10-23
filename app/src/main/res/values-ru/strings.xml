@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Счетчик Отжиманий</string>
+    <string name="start">Старт</string>
+    <string name="history">История</string>
+    <string name="reset">Сбросить счетчик</string>
+    <string name="count_approaches">Количество подходов:</string>
+    <string name="message_delete">Вы правда хотите очистить историю пользования?</string>
+    <string name="yes_button">Да</string>
+    <string name="no_button">Нет</string>
+    <string name="first_start_counter_message">Счетчик использует датчик движения. "\n"Во время отжимания, положите телефон напротив груди и опускайтесь пока не услышите голос счетчика</string>
+    <string name="ok_button">Понятно</string>
+</resources>

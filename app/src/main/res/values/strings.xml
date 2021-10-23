@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Push-Ups Counter</string>
+    <string name="start">Start</string>
+    <string name="history">History</string>
+    <string name="reset">Reset</string>
+    <string name="count_approaches">Count of attempts:</string>
+    <string name="message_delete">Do you really want to remove the story?</string>
+    <string name="yes_button">Yes</string>
+    <string name="no_button">No</string>
+    <string name="first_start_counter_message">The counter uses motion sensors. During push-ups, put your phone against your chest and go down until you hear the meter\'s voice</string>
+    <string name="ok_button">OK</string>
+</resources>
