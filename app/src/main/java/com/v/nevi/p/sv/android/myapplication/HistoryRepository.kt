@@ -2,6 +2,8 @@ package com.v.nevi.p.sv.android.myapplication
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.v.nevi.p.sv.android.myapplication.database.HistoryDao
 import com.v.nevi.p.sv.android.myapplication.database.HistoryDatabase
 import com.v.nevi.p.sv.android.myapplication.model.History
@@ -14,7 +16,13 @@ class HistoryRepository private constructor(context: Context) {
 
     private val executor = Executors.newSingleThreadExecutor()
 
-    private val database:HistoryDatabase= Room.databaseBuilder(context.applicationContext,
+    private val MIGRATION_1_2=object :Migration(1,2){
+        override fun migrate(database: SupportSQLiteDatabase) {
+
+        }
+    }
+
+    private val database:HistoryDatabase = Room.databaseBuilder(context.applicationContext,
         HistoryDatabase::class.java,
         DATABASE_NAME).build()
 

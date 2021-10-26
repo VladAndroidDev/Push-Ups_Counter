@@ -1,6 +1,7 @@
 package com.v.nevi.p.sv.android.myapplication
 
 import android.content.Context
+import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -10,11 +11,10 @@ import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import com.v.nevi.p.sv.android.myapplication.model.History
-import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.properties.Delegates
 
 class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.OnInitListener {
 
@@ -22,7 +22,8 @@ class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.On
     private lateinit var proximitySensor: Sensor
     private lateinit var counter: TextView
     private lateinit var counterAll: TextView
-    private lateinit var button: Button
+    private lateinit var buttonReset: Button
+    private lateinit var buttonEnd: Button
     private lateinit var tts:TextToSpeech
     private val repository:HistoryRepository = HistoryRepository.getInstance()
     private var currentHistory:History?=null
@@ -44,16 +45,23 @@ class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.On
         proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
         counter = findViewById(R.id.counter)
         counterAll = findViewById(R.id.counter_all)
-        button=findViewById(R.id.reset_button)
-        button.setOnClickListener {
+        buttonReset=findViewById(R.id.reset_button)
+        buttonEnd=findViewById(R.id.end_button)
+        buttonReset.setOnClickListener {
             if(count!=0){
-                countOfApproaches++;
+                countOfApproaches++
             }
-            count=0;
+            count=0
             counter.text=count.toString()
         }
         tts = TextToSpeech(this,this)
         initHistory()
+        val startActivityForResult=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){}
+        buttonEnd.setOnClickListener {
+            val intent=Intent(this,MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivityForResult.launch(intent)
+        }
     }
     private fun firstStart(){
         CounterPreferences.setNowIsFirstStart(this,false)
