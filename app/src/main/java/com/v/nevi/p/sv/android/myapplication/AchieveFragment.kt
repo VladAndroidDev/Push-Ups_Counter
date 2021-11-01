@@ -1,6 +1,7 @@
 package com.v.nevi.p.sv.android.myapplication
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,8 @@ class AchieveFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView=view.findViewById(R.id.achieve_recycler)
         recyclerView.layoutManager=LinearLayoutManager(context)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.setItemViewCacheSize(14)
         model.liveDataGetSumCount.observe(viewLifecycleOwner) {
             if (it == null) {
                 recyclerView.adapter = AchieveAdapter(achieveRepository.listAchieves)
@@ -39,7 +42,6 @@ class AchieveFragment: Fragment() {
     inner class AchieveViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         private val achieveCount:TextView=itemView.findViewById(R.id.achieve_count)
         private val achieveName:TextView=itemView.findViewById(R.id.achieve_name)
-        private val view:View=itemView.findViewById(R.id.view)
         private val achieveLayout:ConstraintLayout=itemView.findViewById(R.id.item_achieve_list)
         private val firstWord:String= context?.getString(R.string.make_word)!!
         private val lastWord:String= context?.getString(R.string.push_ups)!!
@@ -48,18 +50,17 @@ class AchieveFragment: Fragment() {
             val countStr= "$firstWord $count $lastWord"
             achieveCount.text=countStr
             if(isRed){
-
                 achieveLayout.background= context?.resources?.let { val drawable =
                     ResourcesCompat.getDrawable(
                         it,
-                        R.drawable.background_achieve_item_red,
+                        R.drawable.ripple_achieve_item_list_red,
                         context!!.theme
                     )
                     drawable
                 }
-                //view.setBackgroundColor(resources.getColor(R.color.purple_500))
-                context?.resources?.getColor(R.color.white)?.let { achieveCount.setTextColor(it) }
-                context?.resources?.getColor(R.color.white)?.let { achieveName.setTextColor(it) }
+                val color=ContextCompat.getColor(context!!,R.color.white)
+                achieveCount.setTextColor(color)
+                achieveName.setTextColor(color)
             }
         }
     }
@@ -74,8 +75,9 @@ class AchieveFragment: Fragment() {
         override fun onBindViewHolder(holder: AchieveViewHolder, position: Int) {
             val achieve=list[position]
             val count=achieve.count
+            Log.d("MyTag",count.toString())
             val name=achieve.name
-            val isRed=sumCount>=count
+            val isRed = sumCount>=count
             holder.bind(count,name,isRed)
         }
 

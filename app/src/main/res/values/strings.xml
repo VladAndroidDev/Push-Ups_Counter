@@ -26,7 +26,11 @@
     <string name="gladiator">Gladiator</string>
     <string name="superman">Superman</string>
     <string name="titan">Titan</string>
-    <string name="god">God</string>
     <string name="delete">Delete</string>
     <string name="how_to_use_the_counter">Important message!</string>
+    <string name="the_choose_one">The Chosen One</string>
+    <string name="cyborg">Cyborg</string>
+    <string name="strongman">Strongman</string>
+    <string name="the_legend">The Legend</string>
+    <string name="champion">Champion</string>
 </resources>

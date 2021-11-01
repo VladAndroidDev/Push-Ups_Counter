@@ -11,11 +11,15 @@ class AchieveRepository private constructor(context: Context) {
         listAchieves.add(Achieve(1000,context.getString(R.string.good_shaped)))
         listAchieves.add(Achieve(2000,context.getString(R.string.top_guy)))
         listAchieves.add(Achieve(3000,context.getString(R.string.sportsman)))
-        listAchieves.add(Achieve(5000,context.getString(R.string.fighter)))
-        listAchieves.add(Achieve(10000,context.getString(R.string.gladiator)))
-        listAchieves.add(Achieve(15000,context.getString(R.string.superman)))
-        listAchieves.add(Achieve(20000,context.getString(R.string.titan)))
-        listAchieves.add(Achieve(30000,context.getString(R.string.god)))
+        listAchieves.add(Achieve(5000,context.getString(R.string.strongman)))
+        listAchieves.add(Achieve(8000,context.getString(R.string.fighter)))
+        listAchieves.add(Achieve(10000,context.getString(R.string.champion)))
+        listAchieves.add(Achieve(15000,context.getString(R.string.gladiator)))
+        listAchieves.add(Achieve(20000,context.getString(R.string.cyborg)))
+        listAchieves.add(Achieve(25000,context.getString(R.string.superman)))
+        listAchieves.add(Achieve(30000,context.getString(R.string.titan)))
+        listAchieves.add(Achieve(40000,context.getString(R.string.the_choose_one)))
+        listAchieves.add(Achieve(50000,context.getString(R.string.the_legend)))
     }
     companion object {
         private  var INSTANCE: AchieveRepository?=null
