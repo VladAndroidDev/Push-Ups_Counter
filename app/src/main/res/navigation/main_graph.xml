@@ -4,10 +4,13 @@
     android:id="@+id/main_graph"
     app:startDestination="@id/StartFragment">
 
+    <fragment android:id="@+id/AchieveFragment"
+        android:name="com.v.nevi.p.sv.android.myapplication.AchieveFragment"
+        android:label="Achievements Fragment"/>
+
     <fragment android:id="@+id/StartFragment"
         android:name="com.v.nevi.p.sv.android.myapplication.StartFragment"
         android:label="StartFragment"/>
-
 
     <fragment android:id="@+id/HistoryFragment"
         android:name="com.v.nevi.p.sv.android.myapplication.HistoryFragment"

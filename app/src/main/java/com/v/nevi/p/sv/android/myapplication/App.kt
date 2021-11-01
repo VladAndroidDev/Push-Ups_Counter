@@ -6,5 +6,6 @@ class App: Application() {
     override fun onCreate() {
         super.onCreate()
         HistoryRepository.initialize(this)
+        AchieveRepository.initialize(this)
     }
 }

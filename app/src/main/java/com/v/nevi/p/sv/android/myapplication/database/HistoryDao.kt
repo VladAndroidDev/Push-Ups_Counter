@@ -21,4 +21,10 @@ interface HistoryDao {
 
     @Query("DELETE FROM history_table")
     fun deleteAllHistory()
+
+    @Query("SELECT SUM(count) FROM history_table")
+    fun getSumCountLiveData():LiveData<Int>
+
+    @Query("SELECT SUM(countOfApproaches) FROM history_table")
+    fun getSumAttemptsLiveData():LiveData<Int>
 }

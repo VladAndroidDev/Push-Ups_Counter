@@ -37,7 +37,7 @@ class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.On
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if(CounterPreferences.getNowFirstStart(this)){
+        if(CounterPreferences.getNowIsFirstStart(this)){
             firstStart()
         }
         setContentView(R.layout.activity_counter)
@@ -58,6 +58,9 @@ class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.On
         initHistory()
         val startActivityForResult=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){}
         buttonEnd.setOnClickListener {
+            if(countAll!=0){
+                CounterPreferences.setIsAddedFirstHistory(this,true)
+            }
             val intent=Intent(this,MainActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivityForResult.launch(intent)
@@ -70,8 +73,8 @@ class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.On
     }
 
     private fun initHistory(){
-        val date:Date=Date(System.currentTimeMillis())
-        currentDate=SimpleDateFormat("EEEE, d MMMM yyyy", Locale(Locale.getDefault().language)).format(date)
+        val date=Calendar.getInstance().time
+        currentDate=SimpleDateFormat("EEEE, d MMMM yyyy", Locale(Locale.ENGLISH.language)).format(date)
         repository.getHistoryByIdLiveData(currentDate).observe(this){
             currentHistory=it
         }

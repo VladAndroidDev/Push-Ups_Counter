@@ -16,12 +16,6 @@ class HistoryRepository private constructor(context: Context) {
 
     private val executor = Executors.newSingleThreadExecutor()
 
-    private val MIGRATION_1_2=object :Migration(1,2){
-        override fun migrate(database: SupportSQLiteDatabase) {
-
-        }
-    }
-
     private val database:HistoryDatabase = Room.databaseBuilder(context.applicationContext,
         HistoryDatabase::class.java,
         DATABASE_NAME).build()
@@ -37,6 +31,8 @@ class HistoryRepository private constructor(context: Context) {
         executor.execute { dao.deleteAllHistory() }
     }
 
+    fun getSumAttempts()=dao.getSumAttemptsLiveData()
+    fun getSumCount()=dao.getSumCountLiveData()
     fun getAllHistories() = dao.getAllHistories()
 
     fun updateHistory(history: History){

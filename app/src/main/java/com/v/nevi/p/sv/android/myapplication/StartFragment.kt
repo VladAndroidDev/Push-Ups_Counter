@@ -9,9 +9,6 @@ import android.view.ViewGroup
 
 class StartFragment : Fragment() {
 
-    interface CounterCallback{
-        fun startCounter()
-    }
     private var counterCallback: CounterCallback?=null
     private lateinit var startView: View
 
@@ -34,7 +31,6 @@ class StartFragment : Fragment() {
             counterCallback?.startCounter()
         }
     }
-
     override fun onDetach() {
         super.onDetach()
         counterCallback=null

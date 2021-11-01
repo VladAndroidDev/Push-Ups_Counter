@@ -6,8 +6,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.v.nevi.p.sv.android.myapplication.HistoryFragment.RecreateHistoryFragment
 
-class MainActivity : AppCompatActivity(),StartFragment.CounterCallback,HistoryFragment.DeleteCallback {
+
+class MainActivity : AppCompatActivity(),CounterCallback,HistoryFragment.DeleteCallback,
+    RecreateHistoryFragment {
 
     private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navController: NavController
@@ -15,7 +18,6 @@ class MainActivity : AppCompatActivity(),StartFragment.CounterCallback,HistoryFr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val navHostFragment=supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         bottomNavigationView = findViewById(R.id.bottom_navigation)
@@ -32,5 +34,9 @@ class MainActivity : AppCompatActivity(),StartFragment.CounterCallback,HistoryFr
     override fun startDeleteDialog() {
         val dialogDelete=DeleteHistoryDialogFragment()
         dialogDelete.show(supportFragmentManager,null)
+    }
+
+    override fun recreateHistoryFragment() {
+        recreate()
     }
 }
