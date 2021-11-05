@@ -18,6 +18,10 @@
         <item name="buttonBarPositiveButtonStyle">@style/Alert.Button.Positive</item>
         <item name="buttonBarNegativeButtonStyle">@style/Alert.Button.Negative</item>
     </style>
+    <style name="AlertDialogThemeExit">
+        <item name="buttonBarPositiveButtonStyle">@style/Alert.Button.Negative</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Alert.Button.Positive</item>
+    </style>
     <style name="Alert.Button.Positive" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="backgroundTint">@color/purple_500</item>
         <item name="android:textColor">@color/white</item>

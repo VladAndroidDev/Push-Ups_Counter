@@ -15,6 +15,10 @@ class DeleteHistoryDialogFragment: DialogFragment() {
         super.onAttach(context)
         recreateHistoryFragment = context as HistoryFragment.RecreateHistoryFragment
     }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        isCancelable=false
+    }
     private val model:MainActivityViewModel by activityViewModels()
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return activity?.let {

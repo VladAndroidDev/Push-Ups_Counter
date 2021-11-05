@@ -149,4 +149,9 @@ class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.On
         }
         super.onDestroy()
     }
+
+    override fun onBackPressed() {
+        val exitDialogFragment=ExitDialogFragment()
+        exitDialogFragment.show(supportFragmentManager,null)
+    }
 }

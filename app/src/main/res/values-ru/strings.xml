@@ -34,4 +34,6 @@
     <string name="strongman">Силач</string>
     <string name="the_legend">Легенда</string>
     <string name="champion">Чемпион</string>
+    <string name="do_you_really_want_exit">Вы правда хотите закончить тренировку?</string>
+    <string name="click_again">Нажмите еще раз чтобы выйти</string>
 </resources>
