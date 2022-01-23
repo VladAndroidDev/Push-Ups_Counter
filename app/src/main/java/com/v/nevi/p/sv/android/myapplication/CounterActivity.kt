@@ -48,7 +48,7 @@ class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.On
         MobileAds.initialize(this){}
         val adRequest=AdRequest.Builder().build()
 
-        InterstitialAd.load(this, "ca-app-pub-2946397644393077/3532602663", adRequest,
+        InterstitialAd.load(this, "", adRequest,
             object:InterstitialAdLoadCallback(){
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     Log.d(TAG, adError?.message)
