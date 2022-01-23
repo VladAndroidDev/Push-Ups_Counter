@@ -9,13 +9,19 @@ import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.interstitial.InterstitialAd
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.v.nevi.p.sv.android.myapplication.model.History
 import java.text.SimpleDateFormat
 import java.util.*
 
+private const  val TAG="CounterActivityClass"
 class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.OnInitListener {
 
     private lateinit var sensorManager: SensorManager
@@ -33,10 +39,28 @@ class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.On
     private var isDown=false
     private var countOfApproaches:Int=0
     private lateinit var currentDate:String
-
+    private var mInterstitialAd: InterstitialAd? = null
+    private lateinit var startActivityForResult:ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        MobileAds.initialize(this){}
+        val adRequest=AdRequest.Builder().build()
+
+        InterstitialAd.load(this, "ca-app-pub-2946397644393077/3532602663", adRequest,
+            object:InterstitialAdLoadCallback(){
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.d(TAG, adError?.message)
+                    mInterstitialAd = null
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    Log.d(TAG, "Is loaded")
+                    mInterstitialAd = interstitialAd
+                }
+            })
+
         if(CounterPreferences.getNowIsFirstStart(this)){
             firstStart()
         }
@@ -56,14 +80,41 @@ class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.On
         }
         tts = TextToSpeech(this,this)
         initHistory()
-        val startActivityForResult=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){}
+        startActivityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){}
         buttonEnd.setOnClickListener {
-            if(countAll!=0){
-                CounterPreferences.setIsAddedFirstHistory(this,true)
+            showAdd()
+        }
+    }
+
+    private fun startMenuHistory(){
+        if(countAll!=0){
+            CounterPreferences.setIsAddedFirstHistory(this,true)
+        }
+        val intent=Intent(this,MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivityForResult.launch(intent)
+    }
+    private fun showAdd(){
+        mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback(){
+            override fun onAdDismissedFullScreenContent() {
+                Log.d(TAG,"Is norm")
+                startMenuHistory()
             }
-            val intent=Intent(this,MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivityForResult.launch(intent)
+
+            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+                Log.d(TAG,"FAIL")
+                startMenuHistory()
+            }
+
+            override fun onAdShowedFullScreenContent() {
+                Log.d(TAG,"Fullscreen showed")
+            }
+        }
+        if(mInterstitialAd!=null) {
+            mInterstitialAd!!.show(this)
+        }
+        else{
+            startMenuHistory()
         }
     }
     private fun firstStart(){
