@@ -1,0 +1,23 @@
+<resources>
+    <string-array name="mode_entries">
+        <item>Screen touch</item>
+        <item>Manual input</item>
+        <item>Proximity sensor</item>
+    </string-array>
+
+    <string-array name="mode_values">
+        <item>SCREEN_TOUCH</item>
+        <item>MANUAL_INPUT</item>
+        <item>MODE_PROXIMITY_SENSOR</item>
+    </string-array>
+
+    <string-array name="mode_entries_without_proximity_sensor">
+        <item>Screen touch</item>
+        <item>Manual input</item>
+    </string-array>
+
+    <string-array name="mode_values_without_proximity_sensor">
+        <item>SCREEN_TOUCH</item>
+        <item>MANUAL_INPUT</item>
+    </string-array>
+</resources>

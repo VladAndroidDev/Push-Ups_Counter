@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/projects/ForMarket/PushUpsCounter/app/src/main/res/layout/activity_counter.xml" value="0.25416666666666665" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable-v23/start_button_background.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/background_achieve_item.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/background_achieve_item_red.xml" value="0.2703125" />
@@ -14,6 +15,8 @@
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/ic_baseline_history_24.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/ic_baseline_play_arrow_24.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/ic_baseline_play_circle_outline_24.xml" value="0.2703125" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.14635416666666667" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/ic_baseline_settings_white_24.xml" value="0.14635416666666667" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/ic_white_baseline_play_arrow_24.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/non_pressed_start_button.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/pressed_start_button.xml" value="0.2703125" />
@@ -22,14 +25,24 @@
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/ripple_achieve_item_red.xml" value="0.25092592592592594" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/ripple_item_achieve_list.xml" value="0.25092592592592594" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/ripple_item_history_list.xml" value="0.25092592592592594" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/selector_shape_background_settings.xml" value="0.14635416666666667" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/selector_start_button_background.xml" value="0.25092592592592594" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/setting_button_background.xml" value="0.2703125" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/settings_button_background.xml" value="0.14635416666666667" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/settings_button_background_pressed.xml" value="0.14635416666666667" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/shape_counter.xml" value="0.2703125" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/shape_exit_button.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/shape_orange_counter.xml" value="0.2703125" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/shape_settings_button.xml" value="0.2703125" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/shape_settings_button_background.xml" value="0.14635416666666667" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/shape_start_button_background.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/start_button_background.xml" value="0.26615384615384613" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/view_achieve_background.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/view_achive_background.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/activity_counter.xml" value="0.1" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/edittext_dialogfragment.xml" value="0.25416666666666665" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/foter_recyclerview_sets.xml" value="0.1" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/fragment_achive.xml" value="0.25416666666666665" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/fragment_history.xml" value="0.25416666666666665" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/fragment_history_message.xml" value="0.1" />
@@ -38,8 +51,13 @@
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/item_achive_list.xml" value="0.2" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/item_all_history_list.xml" value="0.264" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/item_history_list.xml" value="0.4" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/item_recyclerview_attempts.xml" value="1.7428571428571429" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/item_recyclerview_sets.xml" value="0.25416666666666665" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/preferences_category.xml" value="0.13020833333333334" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/layout/settings_activity.xml" value="0.25416666666666665" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.25416666666666665" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/mipmap-anydpi-v26/icon_counter_round.xml" value="0.14635416666666667" />
+        <entry key="..\:/projects/PushUpsCounter/app/src/main/res/xml/root_preferences.xml" value="0.264" />
       </map>
     </option>
   </component>

@@ -1,57 +1,54 @@
 package com.v.nevi.p.sv.android.myapplication
 
-import android.content.Context
 import android.content.Intent
-import android.hardware.Sensor
-import android.hardware.SensorEvent
-import android.hardware.SensorEventListener
-import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.util.Log
-import android.widget.Button
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-import com.v.nevi.p.sv.android.myapplication.model.History
-import java.text.SimpleDateFormat
-import java.util.*
+import com.v.nevi.p.sv.android.myapplication.databinding.ActivityCounterBinding
+import com.v.nevi.p.sv.android.myapplication.mode.Mode
+import com.v.nevi.p.sv.android.myapplication.mode.ModeInit
 
-private const  val TAG="CounterActivityClass"
-class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.OnInitListener {
+private const val TAG = "CounterActivityClass"
 
-    private lateinit var sensorManager: SensorManager
-    private lateinit var proximitySensor: Sensor
-    private lateinit var counter: TextView
-    private lateinit var counterAll: TextView
-    private lateinit var buttonReset: Button
-    private lateinit var buttonEnd: Button
-    private lateinit var tts:TextToSpeech
-    private val repository:HistoryRepository = HistoryRepository.getInstance()
-    private var currentHistory:History?=null
-    private var ttsEnabled:Boolean=false
-    private var count = 0
-    private var countAll = 0
-    private var isDown=false
-    private var countOfApproaches:Int=0
-    private lateinit var currentDate:String
+class CounterActivity : AppCompatActivity(), LifecycleOwner,ExitDialogFragment.ExitCallback {
+
     private var mInterstitialAd: InterstitialAd? = null
-    private lateinit var startActivityForResult:ActivityResultLauncher<Intent>
+    private lateinit var startActivityForResult: ActivityResultLauncher<Intent>
+    private val mLinearLayoutManager =
+        LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    private val attemptsAdapter = SetAdapter(mLinearLayoutManager)
+    private lateinit var binding: ActivityCounterBinding
+    private lateinit var mode: Mode
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityCounterBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        binding.recyclerShowAttempts.layoutManager = mLinearLayoutManager
+        binding.recyclerShowAttempts.adapter = attemptsAdapter
+        mode = ModeInit.execute(this,binding)
 
-        MobileAds.initialize(this){}
-        val adRequest=AdRequest.Builder().build()
+        val adRequestAdView = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequestAdView)
 
-        InterstitialAd.load(this, "ca-app-pub-2946397644393077/3532602663", adRequest,
-            object:InterstitialAdLoadCallback(){
+        val adRequestInterstitialAd = AdRequest.Builder().build()
+        InterstitialAd.load(this, "ca-app-pub-2946397644393077/3532602663", adRequestInterstitialAd,
+            object: InterstitialAdLoadCallback(){
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    Log.d(TAG, adError?.message)
+                    Log.d(TAG, adError.message)
                     mInterstitialAd = null
                 }
 
@@ -61,148 +58,108 @@ class CounterActivity : AppCompatActivity(), SensorEventListener,TextToSpeech.On
                 }
             })
 
-        if(CounterPreferences.getNowIsFirstStart(this)){
-            firstStart()
+        if (CounterPreferences.getNowIsFirstStartCounter(this)||CounterPreferences.isChangedModeCounter(this)) {
+            showMessage()
         }
-        setContentView(R.layout.activity_counter)
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        proximitySensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
-        counter = findViewById(R.id.counter)
-        counterAll = findViewById(R.id.counter_all)
-        buttonReset=findViewById(R.id.reset_button)
-        buttonEnd=findViewById(R.id.end_button)
-        buttonReset.setOnClickListener {
-            if(count!=0){
-                countOfApproaches++
-            }
-            count=0
-            counter.text=count.toString()
-        }
-        tts = TextToSpeech(this,this)
-        initHistory()
-        startActivityForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){}
-        buttonEnd.setOnClickListener {
+        startActivityForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
+        binding.endButton.setOnClickListener {
             showAdd()
         }
     }
 
-    private fun startMenuHistory(){
-        if(countAll!=0){
-            CounterPreferences.setIsAddedFirstHistory(this,true)
-        }
-        val intent=Intent(this,MainActivity::class.java)
+    private fun startMenuHistory() {
+        mode.saveTrainingResult(this)
+        val intent = Intent(this, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivityForResult.launch(intent)
     }
-    private fun showAdd(){
-        mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback(){
+
+    private fun showAdd() {
+        mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
-                Log.d(TAG,"Is norm")
+                Log.d(TAG, "Is norm")
                 startMenuHistory()
             }
 
             override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                Log.d(TAG,"FAIL")
+                Log.d(TAG, "FAIL")
                 startMenuHistory()
             }
 
             override fun onAdShowedFullScreenContent() {
-                Log.d(TAG,"Fullscreen showed")
+                Log.d(TAG, "Fullscreen showed")
             }
         }
-        if(mInterstitialAd!=null) {
+        if (mInterstitialAd != null) {
             mInterstitialAd!!.show(this)
-        }
-        else{
+        } else {
             startMenuHistory()
         }
     }
-    private fun firstStart(){
-        CounterPreferences.setNowIsFirstStart(this,false)
-        val counterDialog=CounterFirstStartDialogFragment()
-        counterDialog.show(supportFragmentManager,null)
+
+    private fun showMessage() {
+        val counterDialog = CounterDialogFragment()
+        counterDialog.show(supportFragmentManager, null)
     }
 
-    private fun initHistory(){
-        val date=Calendar.getInstance().time
-        currentDate=SimpleDateFormat("EEEE, d MMMM yyyy", Locale(Locale.ENGLISH.language)).format(date)
-        repository.getHistoryByIdLiveData(currentDate).observe(this){
-            currentHistory=it
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        sensorManager.registerListener(this, proximitySensor, SensorManager.SENSOR_DELAY_NORMAL)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        sensorManager.unregisterListener(this)
-    }
-    override fun onSensorChanged(event: SensorEvent?) {
-        if (event?.sensor?.getType() == Sensor.TYPE_PROXIMITY) {
-            if (event.values[0] != 0.0f) {
-                isDown=false
-            }else if(!isDown){
-                countPushUps()
-            }
-        }
-    }
-
-    private fun countPushUps(){
-        count++
-        countAll++
-        counter.text=count.toString()
-        counterAll.text=countAll.toString()
-        speak(count.toString())
-        isDown=true
-    }
-    
-    private fun speak(text:String){
-        if(!ttsEnabled) return
-        tts.speak(text,TextToSpeech.QUEUE_FLUSH,null)
-    }
-
-    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-
-    }
-
-    override fun onInit(status: Int) {
-        if(status==TextToSpeech.SUCCESS){
-            if(tts.isLanguageAvailable(Locale(Locale.getDefault().language))==TextToSpeech.LANG_AVAILABLE){
-                tts.language=Locale(Locale.getDefault().language)
-            }else{
-                tts.language=Locale.US
-            }
-            tts.setPitch(1.3f)
-            tts.setSpeechRate(0.7f)
-            ttsEnabled=true
-        }else{
-            ttsEnabled=false
-        }
-    }
-
-    override fun onDestroy() {
-        tts.shutdown()
-        if(countAll!=0){
-            if(countOfApproaches==0||count!=0){
-                countOfApproaches++
-            }
-            if(currentHistory!=null){
-                currentHistory!!.count+=countAll
-                currentHistory!!.countOfApproaches+=countOfApproaches
-                repository.updateHistory(currentHistory!!)
-            }else{
-                currentHistory = History(currentDate,countAll,countOfApproaches)
-                repository.insertHistory(currentHistory!!)
-            }
-        }
-        super.onDestroy()
-    }
 
     override fun onBackPressed() {
-        val exitDialogFragment=ExitDialogFragment()
-        exitDialogFragment.show(supportFragmentManager,null)
+        val exitDialogFragment = ExitDialogFragment()
+        exitDialogFragment.show(supportFragmentManager, null)
+    }
+
+
+
+    inner class SetAdapter(private val layoutManager: LinearLayoutManager) :
+        RecyclerView.Adapter<SetAdapter.SetViewHolder>() {
+
+
+        private val TYPE_FOOTER = 0
+        private val TYPE_ITEM = 1
+
+        private val listAttempts: MutableList<Int> = mutableListOf()
+
+        init {
+            listAttempts.add(0)
+        }
+
+        private var isWasFirst: Boolean = true
+        fun add(count: Int) {
+            if (isWasFirst) {
+                isWasFirst = !isWasFirst
+                listAttempts[0] = count
+                notifyItemChanged(0)
+            } else {
+                listAttempts.add(count)
+                notifyItemInserted(listAttempts.size + 1)
+                layoutManager.scrollToPosition(listAttempts.size - 1)
+            }
+        }
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetViewHolder {
+            val inflater=LayoutInflater.from(baseContext)
+                val view =
+                    inflater.inflate(R.layout.item_recyclerview_sets, parent, false)
+                return SetViewHolder(view)
+            }
+
+
+        override fun onBindViewHolder(holder: SetViewHolder, position: Int) {
+            holder.bind(listAttempts[position])
+        }
+
+        override fun getItemCount(): Int = listAttempts.size
+
+        inner class SetViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            private var attemptTextView: TextView = itemView.findViewById(R.id.attempt_textview)
+            fun bind(count: Int) {
+                attemptTextView.text = count.toString()
+            }
+        }
+    }
+
+    override fun exit() {
+        finish()
     }
 }

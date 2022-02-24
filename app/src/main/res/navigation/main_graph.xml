@@ -20,4 +20,8 @@
         android:name="com.v.nevi.p.sv.android.myapplication.CounterActivity"
         android:label="Counter Activity"/>
 
+    <activity android:id="@+id/settings_activity"
+        android:name="com.v.nevi.p.sv.android.myapplication.SettingsActivity"
+        android:label="Settings Activity"/>
+
 </navigation>

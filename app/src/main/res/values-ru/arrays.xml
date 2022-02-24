@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mode_entries">
+        <item>Нажатие носом</item>
+        <item>Ручной ввод</item>
+        <item>Датчик движения</item>
+    </string-array>
+
+    <string-array name="mode_values">
+        <item>SCREEN_TOUCH</item>
+        <item>MANUAL_INPUT</item>
+        <item>MODE_PROXIMITY_SENSOR</item>
+    </string-array>
+
+    <string-array name="mode_entries_without_proximity_sensor">
+        <item>Нажатие носом</item>
+        <item>Ручной ввод</item>
+    </string-array>
+
+    <string-array name="mode_values_without_proximity_sensor">
+        <item>SCREEN_TOUCH</item>
+        <item>MANUAL_INPUT</item>
+    </string-array>
+</resources>

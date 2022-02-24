@@ -1,0 +1,33 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <ListPreference
+        app:defaultValue="MODE_PROXIMITY_SENSOR"
+        app:dialogTitle="Select the meter operation mode"
+        app:entries="@array/mode_entries"
+        app:entryValues="@array/mode_values"
+        app:key="list"
+        app:title="@string/counter_mode_operation"
+        app:useSimpleSummaryProvider="true" />
+
+    <PreferenceCategory
+        android:title="@string/other"
+        >
+        <Preference
+            app:key="rate_us"
+            app:title="@string/rate_us"
+            >
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://play.google.com/store/apps/details?id=com.v.nevi.p.sv.android.apps.developers"/>
+        </Preference>
+        <Preference
+            app:key="privacy_policy"
+            app:title="@string/privacy_policy">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://vladandroiddev.github.io/"/>
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

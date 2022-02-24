@@ -4,13 +4,13 @@
     <string name="start">Старт</string>
     <string name="history">История</string>
     <string name="reset">Сбросить счетчик</string>
-    <string name="count_approaches">Количество подходов:</string>
+    <string name="count_sets">Количество подходов:</string>
     <string name="message_delete">Вы правда хотите очистить историю пользования?</string>
     <string name="yes_button">Да</string>
     <string name="no_button">Нет</string>
-    <string name="first_start_counter_message">Счетчик использует датчик движения. "\n"Во время отжимания, положите телефон напротив груди и опускайтесь пока не услышите голос счетчика</string>
+    <string name="first_start_counter_message_with_proximity_sensor">Счетчик использует датчик движения. "\n"Во время отжимания, положите телефон напротив груди и опускайтесь пока не услышите голос счетчика. Если у вас почему-то не корректно работает счетчик выберите другой режим в настройках</string>
     <string name="ok_button">Понятно</string>
-    <string name="end">Закончить тренировку</string>
+    <string name="finish_workout">Закончить тренировку</string>
     <string name="all_attempts">Всего подходов:</string>
     <string name="all_push_ups">Всего отжиманий:</string>
     <string name="achievements">Достижения</string>
@@ -34,6 +34,22 @@
     <string name="strongman">Силач</string>
     <string name="the_legend">Легенда</string>
     <string name="champion">Чемпион</string>
-    <string name="do_you_really_want_exit">Вы правда хотите закончить тренировку?</string>
+    <string name="do_you_really_want_exit">Вы правда хотите закончить тренировку? Результаты не будут сохранены!</string>
     <string name="click_again">Нажмите еще раз чтобы выйти</string>
+
+    <string name="count_push_ups">Количество отжиманий</string>
+    <string name="enter_the_number_of_pushups">Введите количество отжиманий</string>
+    <string name="done">Ок</string>
+    <string name="exit">Выйти</string>
+    <string name="title_activity_settings">Настройки</string>
+
+    <string name="push_up_counting_method">Метод подсчета отжиманий</string>
+    <string name="counter_mode_operation">Режим работы счетчика</string>
+    <string name="first_start_counter_message_without_proximity_sensor">На вашем устройстве не обнаружен датчик движения, поэтому включен альтернативный режим счетчика. Во время отжиманий нажимайте носом на счетчик или выберите другой вариант в настройках</string>
+    <string name="change_on_touch_counter">В этом режиме во время отжимания нажимайте носом на счетчик</string>
+    <string name="change_on_right_counter">В этом режиме во время отжиманий нажмите на счетчик и введите количество отжиманий</string>
+    <string name="change_on_proximity_sensor">В этом режиме во время отжиманий положите телефон на уровне груди и опускайтесь до тех пор, пока не услышите голос счетчика. Если по какой-то причине счетчик у вас работает некорректно, выберите в настройках другой режим</string>
+    <string name="privacy_policy">Политика конфиденциальности</string>
+    <string name="rate_us">Оцените нас</string>
+    <string name="other">Другое</string>
 </resources>

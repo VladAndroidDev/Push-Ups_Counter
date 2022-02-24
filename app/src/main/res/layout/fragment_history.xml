@@ -22,6 +22,6 @@
         android:layout_marginBottom="50dp"
         android:contentDescription="@string/delete"
         android:src="@drawable/ic_baseline_delete_24"
-        app:backgroundTint="@color/purple_500" />
+        app:backgroundTint="@color/red_500" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

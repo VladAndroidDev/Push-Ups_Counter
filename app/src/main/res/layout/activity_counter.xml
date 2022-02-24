@@ -1,66 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CounterActivity">
 
-    <TextView
-        android:id="@+id/counter"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/shape_counter"
-        android:gravity="center"
-        android:text="0"
-        android:textColor="@color/white"
-        android:textSize="48sp"
-        android:layout_marginBottom="400dp"
+
+    <Button
+        android:id="@+id/reset_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"
+        android:text="@string/reset"
+        android:textAllCaps="false"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/counter_wrapper_cardview"
+        app:layout_constraintVertical_bias="0.4"/>
 
-    <TextView
-        android:id="@+id/counter_all"
-        android:layout_width="170dp"
-        android:layout_height="170dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/shape_counter"
-        android:gravity="center"
-        android:text="0"
-        android:textColor="@color/white"
-        android:textSize="48sp"
+    <Button
+        android:id="@+id/end_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/finish_workout"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:padding="15dp"
+        android:layout_margin="4dp"
+        app:layout_constraintBottom_toBottomOf="@id/ad_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/reset_button"
+        app:layout_constraintVertical_bias="0.3"/>
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/counter_wrapper_cardview"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginBottom="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+        app:cardBackgroundColor="@color/red_500"
+        app:cardCornerRadius="8dp">
+    <TextView
+        android:id="@+id/counterTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="56sp"
+         />
+    </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/reset_button"
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_recyclerview_show_attempts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintEnd_toStartOf="@id/card_counter_all"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/card_counter_all"
+        app:cardBackgroundColor="@color/grey">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_show_attempts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            />
+
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_counter_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="@string/reset"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/counter_all"
-        app:layout_constraintVertical_bias="0.251" />
-
-    <Button
-        android:id="@+id/end_button"
+        app:layout_constraintStart_toEndOf="@id/card_recyclerview_show_attempts"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/red_500"
+        app:layout_constraintHorizontal_bias="0">
+    <TextView
+        android:id="@+id/counter_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/end"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/reset_button"
-        />
+        android:text="0"
+        android:textColor="@color/white"
+        android:padding="15dp"
+        android:textSize="56sp"/>
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ad_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:layout_constraintEnd_toEndOf="parent"
+        ads:layout_constraintStart_toStartOf="parent"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        ads:layout_constraintTop_toBottomOf="@id/end_button"
+        ads:layout_constraintVertical_bias="1"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-2946397644393077/7365946018">
+    </com.google.android.gms.ads.AdView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

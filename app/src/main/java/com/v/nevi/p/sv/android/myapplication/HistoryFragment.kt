@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.*
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -23,7 +22,7 @@ class HistoryFragment : Fragment() {
     private val model: MainActivityViewModel by activityViewModels()
     private lateinit var recyclerView: RecyclerView
     private var deleteCallback: DeleteCallback? = null
-    private var counterCallback: CounterCallback? = null
+    private var counterCallback: StartFragment.CounterCallback? = null
     private var isAddedFirstHistory: Boolean = false
 
     interface DeleteCallback {
@@ -41,7 +40,7 @@ class HistoryFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         deleteCallback = context as DeleteCallback
-        counterCallback = context as CounterCallback
+        counterCallback = context as StartFragment.CounterCallback
     }
 
     override fun onCreateView(
@@ -90,9 +89,9 @@ class HistoryFragment : Fragment() {
     inner class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val dateTextView: TextView = itemView.findViewById(R.id.date_text_view)
-        private val countTextView: TextView = itemView.findViewById(R.id.count_text_view)
+        private val countTextView: TextView = itemView.findViewById(R.id.count_all_attempts_text_view)
         private val countApproachesTextView: TextView =
-            itemView.findViewById(R.id.count_approaches_text_view)
+            itemView.findViewById(R.id.count_attempts_text_view)
 
         fun bind(history: History) {
             val dateF: DateFormat =
@@ -106,7 +105,7 @@ class HistoryFragment : Fragment() {
             dateTextView.text = resultDate
             countTextView.text = history.count.toString()
             val countOfApproaches =
-                context?.resources?.getString(R.string.count_approaches) + " " + history.countOfApproaches
+                context?.resources?.getString(R.string.count_sets) + " " + history.countOfApproaches
             countApproachesTextView.text = countOfApproaches
         }
     }
@@ -135,7 +134,6 @@ class HistoryFragment : Fragment() {
 
         var list: List<History> = list
             set(value) {
-                //val oldSize=field.size
                 field = value
                 if(field.isEmpty())
                     notifyDataSetChanged()

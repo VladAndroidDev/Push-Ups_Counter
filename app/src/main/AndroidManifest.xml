@@ -2,16 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.v.nevi.p.sv.android.myapplication">
 
-    <uses-permission android:name="android.hardware.sensor.proximity"
-        android:required="true"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-
-    <queries>
-        <intent>
-            <action android:name="android.intent.action.TTS_SERVICE" />
-        </intent>
-    </queries>
-
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -21,23 +11,39 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PushUpsCounter">
         <activity
-            android:name=".CounterActivity"
+            android:name=".SettingsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_settings"
             android:screenOrientation="portrait"
-            android:exported="true" />
+            />
+        <activity
+            android:name=".CounterActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-2946397644393077~2844522743"/>
-
+            android:value="ca-app-pub-2946397644393077~2844522743" />
     </application>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
+    <uses-permission android:name="android.hardware.sensor.proximity"
+        android:required="false"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

@@ -6,29 +6,42 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class ExitDialogFragment:DialogFragment() {
+class ExitDialogFragment : DialogFragment() {
 
-    private var activityCounter:CounterActivity?=null
+    interface ExitCallback {
+        fun exit()
+    }
+
+    private var callback: ExitCallback? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        isCancelable=false
+        isCancelable = false
     }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        activityCounter = context as CounterActivity
+        callback = context as ExitCallback
     }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let{
-            val builder=MaterialAlertDialogBuilder(it,R.style.AlertDialogThemeExit)
+        return activity?.let { frActivity ->
+            val builder = MaterialAlertDialogBuilder(frActivity, R.style.AlertDialogThemeExit)
             builder.setMessage(R.string.do_you_really_want_exit)
-                .setPositiveButton(R.string.yes_button){dialog, _ ->
+                .setPositiveButton(R.string.yes_button) { dialog, _ ->
                     dialog.cancel()
-                    activityCounter?.finish()
-                }.setNegativeButton(R.string.no_button){
-                        dialog, _ -> dialog.cancel()
+                    callback?.exit()
+
+                }.setNegativeButton(R.string.no_button) { dialog, _ ->
+                    dialog.cancel()
                 }
             builder.create()
-        }?:throw IllegalAccessException()
+        } ?: throw IllegalAccessException()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback = null
     }
 }
