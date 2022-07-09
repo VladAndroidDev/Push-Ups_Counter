@@ -82,11 +82,6 @@ class CounterActivity : AppCompatActivity(), LifecycleOwner,ExitDialogFragment.E
                 startMenuHistory()
             }
 
-            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
-                Log.d(TAG, "FAIL")
-                startMenuHistory()
-            }
-
             override fun onAdShowedFullScreenContent() {
                 Log.d(TAG, "Fullscreen showed")
             }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Licznik pompek</string>
+    <string name="start">Start</string>
+    <string name="history">Historia</string>
+    <string name="reset">Wyzerować licznik</string>
+    <string name="count_sets">Liczba setów:</string>
+    <string name="message_delete">Czy na pewno chcesz wyczyścić historię użytkowania?</string>
+    <string name="yes_button">Tak</string>
+    <string name="no_button">Nie</string>
+    <string name="first_start_counter_message_with_proximity_sensor">Licznik wykorzystuje czujnik ruchu. "\n"Podczas wirowania podłóż telefon pod siebie i opuść się, aż usłyszysz głos licznika. Jeśli z jakiegoś powodu licznik nie działa prawidłowo, na początek wybierz inny tryb</string>
+    <string name="ok_button">Jasne</string>
+    <string name="finish_workout">Zakończ trening</string>
+    <string name="all_sets">Całkowita liczba setów:</string>
+    <string name="all_push_ups">Całkowita liczba pompek:</string>
+    <string name="achievements">Osiągnięcia</string>
+    <string name="beginner">Początkujący</string>
+    <string name="make_word">Wykonaj</string>
+    <string name="push_ups">pompek</string>
+    <string name="message_not_have_any_history">Tu jeszcze nic nie ma. Wykonaj pierwszy trening, aby dodać pierwszą historię</string>
+    <string name="start_the_first_training">Rozpocznij swój pierwszy trening</string>
+    <string name="novice">Nowicjusz</string>
+    <string name="good_shaped">W dobrej kondycji</string>
+    <string name="top_guy">Najlepszy </string>
+    <string name="sportsman">Sportowiec</string>
+    <string name="fighter">Wojownik</string>
+    <string name="gladiator">Gladiator</string>
+    <string name="superman">Nadczłowiek</string>
+    <string name="titan">Tytan</string>
+    <string name="delete">Usunąć</string>
+    <string name="how_to_use_the_counter">Ważna wiadomość!</string>
+    <string name="the_choose_one">Wybraniec</string>
+    <string name="cyborg">Cyborg</string>
+    <string name="strongman">Silny mężczyzna</string>
+    <string name="the_legend">Legenda</string>
+    <string name="champion">Mistrz</string>
+    <string name="do_you_really_want_exit">Czy na pewno chcesz dokończyć trening? Wyniki nie zostaną zapisane!</string>
+    <string name="click_again">Dotknij ponownie, aby wyjść</string>
+
+    <string name="count_push_ups">Liczba pompek</string>
+    <string name="enter_the_number_of_pushups">Wpisz liczbę pompek</string>
+    <string name="done">Zrobione</string>
+    <string name="exit">Wyjście</string>
+    <string name="title_activity_settings">Ustawienia</string>
+
+    <string name="push_up_counting_method">Metoda liczenia pompek</string>
+    <string name="counter_mode_operation">Tryb pracy licznika</string>
+    <string name="first_start_counter_message_without_proximity_sensor">Na urządzeniu nie wykryto czujnika ruchu, więc włączony jest tryb alternatywny licznika. Podczas wykonywania pompek naciskaj nosem na licznik lub wybierz inną opcję w ustawieniach</string>
+    <string name="change_on_touch_counter">W tym trybie podczas wykonywania pompek naciskaj nosem na licznik</string>
+    <string name="change_on_right_counter">W tym trybie podczas wykonywania pompek naciśnij licznik i wprowadź liczbę pompek</string>
+    <string name="change_on_proximity_sensor">W tym trybie, podczas wykonywania pompek, podłóż telefon pod siebie i opuść się, aż usłyszysz głos licznika. Jeśli z jakiegoś powodu licznik nie działa poprawnie, wybierz inny tryb w ustawieniach</string>
+    <string name="privacy_policy">Polityka prywatności</string>
+    <string name="rate_us">Oceń nas</string>
+    <string name="other">Inny</string>
+</resources>

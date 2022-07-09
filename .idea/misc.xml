@@ -3,7 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/projects/ForMarket/PushUpsCounter/app/src/main/res/drawable/non_pressed_start_button.xml" value="0.158" />
+        <entry key="..\:/projects/ForMarket/PushUpsCounter/app/src/main/res/drawable/ripple_settings_button.xml" value="0.1235" />
+        <entry key="..\:/projects/ForMarket/PushUpsCounter/app/src/main/res/drawable/ripple_start_button.xml" value="0.158" />
+        <entry key="..\:/projects/ForMarket/PushUpsCounter/app/src/main/res/drawable/selector_start_button_background.xml" value="0.158" />
         <entry key="..\:/projects/ForMarket/PushUpsCounter/app/src/main/res/layout/activity_counter.xml" value="0.25416666666666665" />
+        <entry key="..\:/projects/ForMarket/PushUpsCounter/app/src/main/res/layout/activity_main.xml" value="0.11354166666666667" />
+        <entry key="..\:/projects/ForMarket/PushUpsCounter/app/src/main/res/layout/edittext_dialogfragment.xml" value="0.25416666666666665" />
+        <entry key="..\:/projects/ForMarket/PushUpsCounter/app/src/main/res/layout/fragment_start.xml" value="0.25416666666666665" />
+        <entry key="..\:/projects/ForMarket/PushUpsCounter/app/src/main/res/layout/item_recyclerview_sets.xml" value="0.25416666666666665" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable-v23/start_button_background.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/background_achieve_item.xml" value="0.2703125" />
         <entry key="..\:/projects/PushUpsCounter/app/src/main/res/drawable/background_achieve_item_red.xml" value="0.2703125" />

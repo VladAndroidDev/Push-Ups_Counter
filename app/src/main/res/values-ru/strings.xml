@@ -11,7 +11,7 @@
     <string name="first_start_counter_message_with_proximity_sensor">Счетчик использует датчик движения. "\n"Во время отжимания, положите телефон напротив груди и опускайтесь пока не услышите голос счетчика. Если у вас почему-то не корректно работает счетчик выберите другой режим в настройках</string>
     <string name="ok_button">Понятно</string>
     <string name="finish_workout">Закончить тренировку</string>
-    <string name="all_attempts">Всего подходов:</string>
+    <string name="all_sets">Всего подходов:</string>
     <string name="all_push_ups">Всего отжиманий:</string>
     <string name="achievements">Достижения</string>
     <string name="beginner">Начинающий</string>
