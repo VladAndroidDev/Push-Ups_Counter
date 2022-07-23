@@ -2,6 +2,7 @@ package com.v.nevi.p.sv.android.myapplication
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 
 private const val PREF_FIRST_START_COUNTER = "first-start-1"
@@ -11,8 +12,23 @@ private const val PREF_CURRENT_MODE = "current-mode"
 private const val PREF_FIRST_START_APP = "pref-first-start-app"
 private const val PREF_HAS_DEVICE_PROXIMITY_SENSOR = "pref-has-device-proximity-sensor"
 private const val PREF_CHANGED_MODE_COUNTER = "pref-changed-mode-counter"
-
+private const val COUNTER_USING_APP = "counter-using-app"
 object CounterPreferences {
+
+    fun incrementCounterUsingApp(context: Context){
+        val pref = context.getSharedPreferences(COUNTER_USING_APP,Context.MODE_PRIVATE)
+        var counter = pref.getInt(COUNTER_USING_APP,0)
+        counter++
+        pref.edit {
+            putInt(COUNTER_USING_APP,counter)
+        }
+    }
+
+    fun getCounterUsingApp(context: Context):Int{
+        val pref = context.getSharedPreferences(COUNTER_USING_APP,Context.MODE_PRIVATE)
+        return pref.getInt(COUNTER_USING_APP,0)
+    }
+
     fun getNowIsFirstStartCounter(context: Context): Boolean {
         val pref = context.getSharedPreferences(PREF_COUNTER_ACTIVITY, Context.MODE_PRIVATE)
         return pref.getBoolean(PREF_FIRST_START_COUNTER, true)

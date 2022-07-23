@@ -1,7 +1,7 @@
 package com.v.nevi.p.sv.android.myapplication
 
+import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,19 +10,23 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.ads.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.FullScreenContentCallback
+import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.play.core.review.ReviewManagerFactory
 import com.v.nevi.p.sv.android.myapplication.databinding.ActivityCounterBinding
 import com.v.nevi.p.sv.android.myapplication.mode.Mode
 import com.v.nevi.p.sv.android.myapplication.mode.ModeInit
 
 private const val TAG = "CounterActivityClass"
 
-class CounterActivity : AppCompatActivity(), LifecycleOwner,ExitDialogFragment.ExitCallback {
+class CounterActivity : AppCompatActivity(), LifecycleOwner, ExitDialogFragment.ExitCallback {
 
     private var mInterstitialAd: InterstitialAd? = null
     private lateinit var startActivityForResult: ActivityResultLauncher<Intent>
@@ -32,21 +36,20 @@ class CounterActivity : AppCompatActivity(), LifecycleOwner,ExitDialogFragment.E
     private lateinit var binding: ActivityCounterBinding
     private lateinit var mode: Mode
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCounterBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.recyclerShowAttempts.layoutManager = mLinearLayoutManager
         binding.recyclerShowAttempts.adapter = attemptsAdapter
-        mode = ModeInit.execute(this,binding)
+        mode = ModeInit.execute(this, binding)
 
         val adRequestAdView = AdRequest.Builder().build()
         binding.adView.loadAd(adRequestAdView)
 
         val adRequestInterstitialAd = AdRequest.Builder().build()
         InterstitialAd.load(this, "ca-app-pub-2946397644393077/3532602663", adRequestInterstitialAd,
-            object: InterstitialAdLoadCallback(){
+            object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     Log.d(TAG, adError.message)
                     mInterstitialAd = null
@@ -58,13 +61,47 @@ class CounterActivity : AppCompatActivity(), LifecycleOwner,ExitDialogFragment.E
                 }
             })
 
-        if (CounterPreferences.getNowIsFirstStartCounter(this)||CounterPreferences.isChangedModeCounter(this)) {
+        if (CounterPreferences.getNowIsFirstStartCounter(this) || CounterPreferences.isChangedModeCounter(
+                this
+            )
+        ) {
             showMessage()
         }
         startActivityForResult =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {}
         binding.endButton.setOnClickListener {
-            showAdd()
+            CounterPreferences.incrementCounterUsingApp(this)
+            val counterUsingApp = CounterPreferences.getCounterUsingApp(this)
+            if (counterUsingApp >= 5) {
+                requestReviewFlow(this)
+            } else {
+                showAdd()
+            }
+        }
+    }
+
+    private fun requestReviewFlow(activity: Activity) {
+
+        val reviewManager = ReviewManagerFactory.create(activity)
+
+        val requestReviewFlow = reviewManager.requestReviewFlow()
+
+        requestReviewFlow.addOnCompleteListener { request ->
+
+            if (request.isSuccessful) {
+
+                val reviewInfo = request.result
+
+                val flow = reviewManager.launchReviewFlow(activity, reviewInfo)
+
+                flow.addOnCompleteListener {
+                    // Обрабатываем завершение сценария оценки
+                    showAdd()
+                }
+            } else {
+                showAdd()
+                // Обрабатываем тут ошибку
+            }
         }
     }
 
@@ -105,7 +142,6 @@ class CounterActivity : AppCompatActivity(), LifecycleOwner,ExitDialogFragment.E
     }
 
 
-
     inner class SetAdapter(private val layoutManager: LinearLayoutManager) :
         RecyclerView.Adapter<SetAdapter.SetViewHolder>() {
 
@@ -133,11 +169,11 @@ class CounterActivity : AppCompatActivity(), LifecycleOwner,ExitDialogFragment.E
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SetViewHolder {
-            val inflater=LayoutInflater.from(baseContext)
-                val view =
-                    inflater.inflate(R.layout.item_recyclerview_sets, parent, false)
-                return SetViewHolder(view)
-            }
+            val inflater = LayoutInflater.from(baseContext)
+            val view =
+                inflater.inflate(R.layout.item_recyclerview_sets, parent, false)
+            return SetViewHolder(view)
+        }
 
 
         override fun onBindViewHolder(holder: SetViewHolder, position: Int) {

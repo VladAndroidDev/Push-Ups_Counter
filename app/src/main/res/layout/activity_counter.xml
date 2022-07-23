@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".CounterActivity">
 
-
     <Button
         android:id="@+id/reset_button"
         android:layout_width="0dp"
